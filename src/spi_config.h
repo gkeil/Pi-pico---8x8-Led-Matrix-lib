@@ -23,5 +23,5 @@
 #define CS_GPIO     5
 
 // SPI port specific settings
-#define SPI_RATE    1000*1000
+#define SPI_RATE    100*1000
 #define SPI_PORT    spi0

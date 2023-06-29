@@ -479,6 +479,8 @@ int maxInit(uint8_t iNum, uint8_t bDecodeMode, uint8_t iChannel, uint8_t iSelect
    gpio_set_dir(CS_GPIO, GPIO_OUT);
    gpio_put(CS_GPIO, 1);
 
+   // set number of displays in the chain
+   iNumControllers = iNum;
 
    // set the initial state of th2 MAX7219 registers and get ready for use 
 

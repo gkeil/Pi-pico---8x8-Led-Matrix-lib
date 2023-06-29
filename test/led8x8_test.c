@@ -32,7 +32,7 @@
 
 // If you have a 7-segment (n-digit) device, leave this
 // otherwise if you have an set of 8x8 arrays, comment this out
-#define SEVEN_SEGMENT
+//#define SEVEN_SEGMENT
 
 int main(int argc, char* argv[])
 {
@@ -51,7 +51,7 @@ int iNumControllers, iSegmentMode;
 	iNumControllers = 1;
 	iSegmentMode = 1;
 #else
-	iNumControllers = 4; // assume 4 x 8x8 array
+	iNumControllers = 2; // assume 4 x 8x8 array
 	iSegmentMode = 0;
 #endif
 	// Initialize the library
@@ -69,15 +69,16 @@ int iNumControllers, iSegmentMode;
     sleep_us(4000000);              // port to pico
 #else
 // Display a message and scroll it to the left (2 iterations)
-	for (i=0; i<2; i++)
+	for (i=0; i<10; i++)
 	{
 		sprintf(cTemp,"BitBank MAX7219 library scroll test #%02d 10:05 ", i);
+
 		maxDrawString(cTemp, bImg, iPitch, 1); // draw narrow digits
 		for (j=0; j<iPitch*8; j++)
 		{
 			maxSendImage(bImg, iPitch);
 			maxScrollBitmap(bImg, iPitch, 1);
-			usleep(40000);
+			sleep_us(40000);
 		} // for each pixel to scroll
 	} // for each iteration
 #endif // SEVEN_SEGMENT

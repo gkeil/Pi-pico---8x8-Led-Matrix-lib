@@ -37,13 +37,13 @@ static inline void cs_deselect()
     asm volatile("nop \n nop \n nop");
 }
 
-void write_to_leds( uint8_t *row)
+void write_to_leds( uint8_t *row, int len)
 {
     // Cs down
     cs_select();
 
     // write 2 bytes with command / led status
-    spi_write_blocking( spi0, row, 2);
+    spi_write_blocking( spi0, row, len);
 
     // cs up
     cs_deselect();
@@ -88,28 +88,38 @@ void main()
         // shutdown mode
         row[0] = 0x0C;
         row[1] = 0x00;
+        row[2] = 0x0C;
+        row[3] = 0x00;
 
-        write_to_leds(row);
+        write_to_leds(row,4);
         
 
         // set scan limit
         row[0] = 0x0B;
         row[1] = 0x07;
+        row[2] = 0x0B;
+        row[3] = 0x07;
 
-        write_to_leds(row);
+        write_to_leds(row,4);
 
         // exit test mode
         row[0] = 0x0F;
         row[1] = 0x00;
+        row[2] = 0x0F;
+        row[3] = 0x00;
 
-        write_to_leds(row);
+
+        write_to_leds(row,4);
 
         // clear all leds
         for ( i = 1; i <= 8; i++)
         {
             row[0] = i;
             row[1] = 0;
-            write_to_leds(row);
+            row[2] = i;
+            row[3] = 0;
+
+            write_to_leds(row,4);
 
         }
 
@@ -117,8 +127,10 @@ void main()
         // exit shutdown mode
         row[0] = 0x0C;
         row[1] = 0x01;
+        row[2] = 0x0C;
+        row[3] = 0x01;
 
-        write_to_leds(row);
+        write_to_leds(row,4);
 
         // initialization complet -------------------------
 
@@ -148,7 +160,11 @@ void main()
 
             row[0] = i;
             row[1] = content;
-            write_to_leds(row);
+            row[2] = i;
+            row[3] = content;
+
+
+            write_to_leds(row,4);
             sleep_ms( 200 );
 
         }
@@ -159,7 +175,11 @@ void main()
             
             row[0] = i;
             row[1] = 0;
-            write_to_leds(row);
+            row[2] = i;
+            row[3] = 0;
+
+
+            write_to_leds(row,4);
             sleep_ms( 200 );
 
         }
