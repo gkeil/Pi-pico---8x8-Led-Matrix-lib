@@ -12,4 +12,5 @@ Displays can cascade.
 Low level will allow direct control of a line of leds in one display.
 High level will allow shadow display, scroll, etc.
 
+Test line
 
