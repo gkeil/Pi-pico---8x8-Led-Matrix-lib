@@ -39,7 +39,7 @@ The controllers communicate via a SPI (Serial Peripheral Interface) interface.
 Controllers can be cascaded by connecting the DOUT of one controller to the DIN of the next controller.
 <br>
 
-![8x8 led pinout](led8x8_pinout.jpeg)
+![8x8 led pinout](led8x8_pinout_2.jpeg)
 <br>
 
 The 8x8 led controller can be cascaded to conform large displays.
